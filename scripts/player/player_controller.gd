@@ -73,6 +73,7 @@ var attack_timer: float = 0.0
 # Signals
 signal stance_changed(new_stance: Stance)
 signal attack_performed(direction: AttackDirection, stance: Stance)
+signal technique_performed(direction: AttackDirection)
 signal resonance_changed(new_value: float)
 signal health_changed(new_value: float)
 signal player_overloaded()
@@ -203,6 +204,9 @@ func perform_attack(direction: AttackDirection) -> void:
 	
 	# Emit attack signal for wave system to handle
 	attack_performed.emit(direction, current_stance)
+	# Backwards-compatible signal used in docs/examples
+	if has_signal("technique_performed"):
+		technique_performed.emit(direction)
 	
 	# Play attack animation
 	if animation_player:
