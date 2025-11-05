@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2e022u0g5jm5"]
+
+[ext_resource type="Script" uid="uid://ccn35hyrnhkl7" path="res://scripts/managers/combat_manager.gd" id="1_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://ct1t2cfn1yq3t" path="res://scenes/enemies/fast_striker.tscn" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://b24xvqc146vji" path="res://scenes/player/player.tscn" id="3_tefeu"]
+[ext_resource type="Script" uid="uid://2pu6d1r4nwfr" path="res://scripts/waves/wave_system.gd" id="4_o6xl0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tipki"]
+size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_85g3d"]
+size = Vector3(20, 0.2, 20)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jyhfs"]
+
+[sub_resource type="Sky" id="Sky_tbgi4"]
+sky_material = SubResource("ProceduralSkyMaterial_jyhfs")
+
+[sub_resource type="Environment" id="Environment_tefeu"]
+background_mode = 2
+sky = SubResource("Sky_tbgi4")
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.4, 0.6, 1)
+ambient_light_energy = 0.3
+tonemap_mode = 2
+tonemap_exposure = 1.1
+glow_enabled = true
+glow_strength = 1.2
+glow_bloom = 0.1
+
+[node name="Main" type="Node3D"]
+
+[node name="CombatManager" type="Node" parent="."]
+script = ExtResource("1_jyhfs")
+enemy_scenes = Array[PackedScene]([ExtResource("2_tbgi4")])
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_tipki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_85g3d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+light_energy = 1.5
+shadow_enabled = true
+shadow_opacity = 0.8
+
+[node name="Player" parent="." instance=ExtResource("3_tefeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="WaveSystem" type="Node" parent="."]
+script = ExtResource("4_o6xl0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tefeu")
+
+[node name="ArenaManager" type="Node" parent="."]

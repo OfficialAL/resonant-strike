@@ -1,0 +1,6 @@
+[gd_scene load_steps=1 format=3 uid="uid://human_male_wrapper"]
+
+[ext_resource type="Script" uid="uid://human_selector_script" path="res://scripts/models/human_selector.gd" id="1_script"]
+
+[node name="HumanMale" type="Node3D"]
+script = ExtResource("1_script")

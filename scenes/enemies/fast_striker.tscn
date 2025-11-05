@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct1t2cfn1yq3t"]
+
+[ext_resource type="Script" uid="uid://bks5y5awhv6my" path="res://scripts/enemies/fast_striker.gd" id="1_5py2t"]
+[ext_resource type="PackedScene" uid="uid://human_male_scene" path="res://scenes/models/human_male.tscn" id="2_human_male"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xec8m"]
+
+[node name="FastStriker" type="CharacterBody3D"]
+script = ExtResource("1_5py2t")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="HumanModel" parent="Visual" instance=ExtResource("2_human_male")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_xec8m")

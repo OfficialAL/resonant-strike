@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfbgpfot86mm7"]
+
+[ext_resource type="Script" uid="uid://7ii1e2q27pjj" path="res://scripts/player/right_arm_controller.gd" id="1_controller"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_forearm"]
+radius = 0.08
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skin"]
+albedo_color = Color(0.8, 0.65, 0.5, 1)
+metallic = 0.1
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_hand"]
+size = Vector3(0.15, 0.06, 0.25)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_forearm"]
+radius = 0.08
+height = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hand"]
+size = Vector3(0.14840087, 0.06, 0.24072266)
+
+[node name="RightArm" type="Node3D"]
+
+[node name="RightArmController" type="Node" parent="."]
+script = ExtResource("1_controller")
+
+[node name="ArmGeometry" type="Node3D" parent="."]
+
+[node name="Forearm" type="MeshInstance3D" parent="ArmGeometry"]
+transform = Transform3D(-1, 0, 0, 0, -0.6238797, -0.7815204, 0, -0.7815204, 0.6238797, -0.75, -0.35, -0.45)
+mesh = SubResource("CapsuleMesh_forearm")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Hand" type="MeshInstance3D" parent="ArmGeometry/Forearm"]
+transform = Transform3D(1, 0, 0, 0, 0.62387955, 0.7815206, 0, -0.7815206, 0.62387955, 0, -0.34482282, 0.015235856)
+mesh = SubResource("BoxMesh_hand")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Hitboxes" type="Node3D" parent="."]
+
+[node name="ForearmHitbox" type="Area3D" parent="Hitboxes"]
+transform = Transform3D(-1, 0, 0, 0, -0.6238797, -0.7815204, 0, -0.7815204, 0.6238797, -0.75, -0.35, -0.45)
+
+[node name="ForearmCollision" type="CollisionShape3D" parent="Hitboxes/ForearmHitbox"]
+shape = SubResource("CapsuleShape3D_forearm")
+
+[node name="HandHitbox" type="Area3D" parent="Hitboxes/ForearmHitbox"]
+transform = Transform3D(1.1, 0, 0, 0, 0.6862675, 0.85967255, 0, -0.85967255, 0.6862675, 0, -0.35, 0.013)
+
+[node name="HandCollision" type="CollisionShape3D" parent="Hitboxes/ForearmHitbox/HandHitbox"]
+transform = Transform3D(1, 0, 0, 0, 0.99999964, 7.4505806e-08, 0, -7.4505806e-08, 0.99999964, -0.00048309565, 0.005372137, 0.0011327416)
+shape = SubResource("BoxShape3D_hand")

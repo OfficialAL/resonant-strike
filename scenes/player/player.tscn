@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://b24xvqc146vji"]
+
+[ext_resource type="Script" uid="uid://b52ndavnnj0ne" path="res://scripts/player/player_controller.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://d3fdyr0v3glfo" path="res://scenes/player/left_arm.tscn" id="2_left_arm"]
+[ext_resource type="PackedScene" uid="uid://dfbgpfot86mm7" path="res://scenes/player/right_arm.tscn" id="3_right_arm"]
+[ext_resource type="PackedScene" uid="uid://human_male_scene" path="res://scenes/models/human_male.tscn" id="4_human_male"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hqtel"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_stance_indicator"]
+radius = 0.1
+height = 0.06
+radial_segments = 60
+is_hemisphere = true
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_4flbx")
+
+[node name="Visual" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="HumanModel" parent="Visual" instance=ExtResource("4_human_male")]
+visible = false
+
+[node name="LeftArm" parent="Visual" instance=ExtResource("2_left_arm")]
+transform = Transform3D(-0.999991, 0, 0.004241128, 0, 1, 0, -0.004241128, 0, -0.999991, -0.51903963, 0.74809134, -1.0277059)
+
+[node name="RightArm" parent="Visual" instance=ExtResource("3_right_arm")]
+transform = Transform3D(-0.9971812, 0, 0.075030945, 0, 1, 0, -0.075030945, 0, -0.9971812, 0.5, 0.64719856, -0.8444953)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_hqtel")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008564472, 1.7, 0)
+far = 120.0
+
+[node name="StanceIndicator" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3617884, -0.5)
+mesh = SubResource("SphereMesh_stance_indicator")

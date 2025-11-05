@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj4v7k2p8w1h2"]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_test"]
+[ext_resource type="PackedScene" path="res://scenes/player/left_arm.tscn" id="2_leftarm"]
+[ext_resource type="PackedScene" path="res://scenes/player/right_arm.tscn" id="3_rightarm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stance"]
+albedo_color = Color(0, 1, 1, 1)
+metallic = 0.2
+roughness = 0.8
+
+[node name="TestPlayer" type="CharacterBody3D"]
+script = ExtResource("1_test")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SphereMesh.new()
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="StanceIndicator" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.3, -0.5)
+mesh = SphereMesh.new()
+material_override = SubResource("StandardMaterial3D_stance")
+
+[node name="LeftArm" parent="Camera3D" instance=ExtResource("2_leftarm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.2, -0.1)
+
+[node name="RightArm" parent="Camera3D" instance=ExtResource("3_rightarm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.2, -0.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SphereMesh.new()
