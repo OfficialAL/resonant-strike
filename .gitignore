@@ -1,3 +1,38 @@
-# Godot 4+ specific ignores
-.godot/
-/android/
+﻿# Godot-specific
+.import/
+.godot/imported/
+.godot/shader_cache/
+.godot/editor/*-editstate-*
+.godot/editor/*-folding-*
+.godot/scene_groups_cache.cfg
+.godot/uid_cache.bin
+
+# Exported / build artifacts
+.export/
+export_presets.cfg
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+
+# Blender source files (keep if you want, but large)
+assets/models/*.blend
+assets/models/*.blend.import
+
+# Godot import metadata
+*.import
+
+# Cache / temp
+*.cache
+*.temp
+
+# Build files
+bin/
+obj/
+
+# User-specific files
+.DS_Store
