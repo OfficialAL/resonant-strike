@@ -630,8 +630,8 @@ func _create_and_attach(skeleton: Skeleton3D, bone_name: String, arm_node_path: 
 	skeleton.add_child(attach)
 	# Reparent arm node if present
 	if has_node(arm_node_path):
-		var arm_node := get_node(arm_node_path)
-		var old_global := arm_node.global_transform
+		var arm_node: Node = get_node(arm_node_path)
+		var old_global: Transform3D = arm_node.global_transform
 		# Remove from old parent and add under attachment
 		arm_node.get_parent().remove_child(arm_node)
 		attach.add_child(arm_node)
