@@ -1,4 +1,4 @@
-# Headless helper: print nodes and skeleton bone names from imported human scene
+﻿# Headless helper: print nodes and skeleton bone names from imported human scene
 var imported_path := "res://.godot/imported/human.blend-738fbf7b85a13f54d00c9db65cf59296.scn"
 # Headless helper: print nodes and skeleton bone names from imported human scene
 var imported_path: String = "res://.godot/imported/human.blend-738fbf7b85a13f54d00c9db65cf59296.scn"
